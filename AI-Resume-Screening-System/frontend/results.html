@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Results & Ranking | AI Resume Screening</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/results.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">AI</div>
+        <div>
+          <div class="brand-title">ResumeAI</div>
+          <div class="brand-sub">Recruiter Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link"><span>📊</span> <span>Dashboard</span></a>
+        <a href="job.html" class="nav-link"><span>💼</span> <span>Job Descriptions</span></a>
+        <a href="upload.html" class="nav-link"><span>📤</span> <span>Upload Resumes</span></a>
+        <a href="results.html" class="nav-link active"><span>🎯</span> <span>Candidate Results</span></a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <h1 class="topbar-title">Candidate Screening & Matching Results</h1>
+        <div class="topbar-actions">
+          <span id="results-count" class="badge badge-primary" style="font-size: 13px; padding: 6px 12px;">-- Candidates Screened</span>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Search & Filter Controls -->
+        <div class="filters-bar">
+          <div class="search-input-group">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="filter-search" placeholder="Search candidate name or email...">
+          </div>
+
+          <select id="filter-job" class="select-filter">
+            <option value="">All Job Openings</option>
+          </select>
+
+          <input type="text" id="filter-skill" placeholder="Filter by skill (e.g. Python)" class="select-filter" style="width: 170px;">
+
+          <select id="filter-score" class="select-filter">
+            <option value="">Any Match Score</option>
+            <option value="80">≥ 80% High Match</option>
+            <option value="65">≥ 65% Moderate Match</option>
+            <option value="50">≥ 50% Low/Moderate</option>
+          </select>
+
+          <select id="filter-status" class="select-filter">
+            <option value="all">All Statuses</option>
+            <option value="Shortlisted by Recruiter">Shortlisted by Recruiter</option>
+            <option value="Review">Review</option>
+            <option value="Under Review">Under Review</option>
+            <option value="Hold">Hold</option>
+          </select>
+
+          <select id="filter-sort" class="select-filter">
+            <option value="score">Sort: Match Score (High &rarr; Low)</option>
+            <option value="experience">Sort: Experience (Years)</option>
+            <option value="date">Sort: Upload Date</option>
+            <option value="name">Sort: Candidate Name</option>
+          </select>
+        </div>
+
+        <!-- Candidate Results Table -->
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Candidate Details</th>
+                  <th>Match Score</th>
+                  <th>Matching Skills</th>
+                  <th>Missing Skills</th>
+                  <th>Experience</th>
+                  <th>Recruiter Status & Action</th>
+                </tr>
+              </thead>
+              <tbody id="results-table-body">
+                <tr>
+                  <td colspan="6" style="text-align: center; color: #94a3b8; padding: 32px;">Loading candidate rankings...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/results.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "skills": [
+    "Python", "Java", "C++", "C", "C#", "SQL", "R", "Go", "Rust", "Ruby", "PHP", "Swift", "Kotlin", "Scala", "Bash", "Shell",
+    "Pandas", "NumPy", "Scikit-learn", "TensorFlow", "PyTorch", "Keras", "OpenCV", "NLP", "NLTK", "Spacy", "HuggingFace", "Transformers", "LLMs", "LangChain",
+    "Data Analysis", "Data Modeling", "Data Visualization", "Statistics", "Mathematics", "A/B Testing", "Feature Engineering",
+    "Power BI", "Tableau", "Excel", "Advanced Excel", "Looker", "Qlik Sense", "Matplotlib", "Seaborn",
+    "PostgreSQL", "MySQL", "MongoDB", "Redis", "Cassandra", "SQLite", "Oracle", "Snowflake", "BigQuery", "Apache Spark", "Hadoop", "Kafka", "Airflow", "ETL",
+    "React", "Next.js", "Vue.js", "Angular", "Node.js", "Express", "Django", "Flask", "FastAPI", "Spring Boot", "REST APIs", "GraphQL", "HTML5", "CSS3", "Tailwind CSS",
+    "AWS", "Azure", "GCP", "Docker", "Kubernetes", "CI/CD", "Jenkins", "GitHub Actions", "Terraform", "Linux", "Git",
+    "Agile", "Scrum", "Jira", "System Design", "Unit Testing", "Communication", "Problem Solving", "Leadership"
+  ],
+  "synonyms": {
+    "py": "Python",
+    "python3": "Python",
+    "js": "JavaScript",
+    "ts": "TypeScript",
+    "reactjs": "React",
+    "nodejs": "Node.js",
+    "postgres": "PostgreSQL",
+    "mongo": "MongoDB",
+    "powerbi": "Power BI",
+    "ms excel": "Excel",
+    "tableau": "Tableau",
+    "aws": "AWS",
+    "k8s": "Kubernetes",
+    "docker": "Docker",
+    "ml": "Machine Learning",
+    "nlp": "NLP",
+    "tf": "TensorFlow",
+    "pytorch": "PyTorch",
+    "fastapi": "FastAPI",
+    "flask": "Flask",
+    "django": "Django"
+  }
+}

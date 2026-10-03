@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Job Description | AI Resume Screening</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">AI</div>
+        <div>
+          <div class="brand-title">ResumeAI</div>
+          <div class="brand-sub">Recruiter Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link"><span>📊</span> <span>Dashboard</span></a>
+        <a href="job.html" class="nav-link active"><span>💼</span> <span>Job Descriptions</span></a>
+        <a href="upload.html" class="nav-link"><span>📤</span> <span>Upload Resumes</span></a>
+        <a href="results.html" class="nav-link"><span>🎯</span> <span>Candidate Results</span></a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <h1 class="topbar-title">Job Descriptions</h1>
+      </header>
+
+      <main class="content-body" style="max-width: 1080px;">
+        <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;">
+          <!-- Job Form -->
+          <div class="card" style="padding: 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+              <h2 style="font-size: 18px; font-weight: 700;">Define Job Requirements</h2>
+              <button type="button" onclick="loadSampleJob()" class="btn btn-secondary" style="font-size: 12px; padding: 4px 10px;">
+                ⚡ Load Sample Preset
+              </button>
+            </div>
+
+            <form id="job-form" onsubmit="handleJobSubmit(event)">
+              <div style="margin-bottom: 16px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;">Job Title *</label>
+                <input type="text" id="job-title" required placeholder="e.g. Data Analyst" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 14px;">
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;">Department / Team</label>
+                <input type="text" id="job-department" placeholder="e.g. Business Intelligence & Analytics" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 14px;">
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;">Required Skills (Comma-Separated) *</label>
+                <input type="text" id="job-skills" required placeholder="e.g. Python, SQL, Excel, Power BI, Statistics, Tableau" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 14px;">
+                <span style="font-size: 12px; color: var(--text-muted); margin-top: 4px; display: block;">Separate skills with commas. The AI matching engine cross-references these with candidate resumes.</span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                <div>
+                  <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;">Minimum Experience (Years) *</label>
+                  <input type="number" id="job-experience" min="0" max="30" step="0.5" value="2" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 14px;">
+                </div>
+                <div>
+                  <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;">Education Requirement</label>
+                  <input type="text" id="job-education" value="Bachelor in Computer Science or quantitative field" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 14px;">
+                </div>
+              </div>
+
+              <div style="margin-bottom: 24px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;">Job Description *</label>
+                <textarea id="job-description" rows="5" required placeholder="Paste full job overview, roles, and responsibilities..." style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 14px; font-family: inherit;"></textarea>
+              </div>
+
+              <button type="submit" id="btn-save-job" class="btn btn-primary" style="width: 100%; padding: 12px;">
+                Save Job Description & Run Screen
+              </button>
+            </form>
+          </div>
+
+          <!-- Existing Active Jobs List -->
+          <div>
+            <div class="card" style="padding: 20px;">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Active Job Postings</h3>
+              <div id="active-jobs-list" style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="color: #94a3b8; font-size: 13px;">Loading active jobs...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', loadJobs);
+
+    async function loadJobs() {
+      try {
+        const res = await fetch('/api/jobs');
+        const data = await res.json();
+        const container = document.getElementById('active-jobs-list');
+        if (!container) return;
+
+        if (data.jobs && data.jobs.length > 0) {
+          container.innerHTML = data.jobs.map(j => `
+            <div style="padding: 14px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: #f8fafc;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h4 style="font-size: 15px; font-weight: 700; color: #0f172a;">${j.title}</h4>
+                <span class="badge badge-primary">${j.experience}+ yrs exp</span>
+              </div>
+              <div style="font-size: 12px; color: #64748b; margin: 4px 0;">Dept: ${j.department || 'General'}</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;">
+                ${(j.required_skills || []).map(s => `<span class="badge badge-primary" style="font-size: 11px;">${s}</span>`).join('')}
+              </div>
+              <div style="margin-top: 10px;">
+                <a href="results.html?job_id=${j.job_id}" class="btn btn-secondary" style="font-size: 11px; padding: 3px 8px;">View Matches</a>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = `<div style="color: #94a3b8; font-size: 13px;">No jobs created yet.</div>`;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function loadSampleJob() {
+      document.getElementById('job-title').value = 'Data Analyst';
+      document.getElementById('job-department').value = 'Business Intelligence & Analytics';
+      document.getElementById('job-skills').value = 'Python, SQL, Excel, Power BI, Statistics, Tableau';
+      document.getElementById('job-experience').value = '2';
+      document.getElementById('job-education').value = 'Bachelor in Computer Science, Statistics, Mathematics or related quantitative field';
+      document.getElementById('job-description').value = 'We are looking for a Data Analyst to interpret complex datasets, build automated dashboards in Power BI and Tableau, write optimized SQL queries, and work with leadership to translate raw business metrics into actionable growth decisions.';
+      showToast('Sample Data Analyst job loaded!', 'info');
+    }
+
+    async function handleJobSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-save-job');
+      btn.disabled = true;
+      btn.innerText = 'Creating and screening candidates...';
+
+      const payload = {
+        title: document.getElementById('job-title').value,
+        department: document.getElementById('job-department').value,
+        required_skills: document.getElementById('job-skills').value.split(',').map(s => s.trim()).filter(Boolean),
+        experience: parseFloat(document.getElementById('job-experience').value) || 0,
+        education: document.getElementById('job-education').value,
+        description: document.getElementById('job-description').value
+      };
+
+      try {
+        const res = await fetch('/api/jobs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showToast('Job created and candidate resumes screened!', 'success');
+          loadJobs();
+          setTimeout(() => {
+            window.location.href = `results.html?job_id=${data.job.job_id}`;
+          }, 1000);
+        } else {
+          showToast(data.error || 'Failed to create job', 'error');
+        }
+      } catch (err) {
+        showToast('Error connecting to server', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Save Job Description & Run Screen';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Resumes | AI Resume Screening</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">AI</div>
+        <div>
+          <div class="brand-title">ResumeAI</div>
+          <div class="brand-sub">Recruiter Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link"><span>📊</span> <span>Dashboard</span></a>
+        <a href="job.html" class="nav-link"><span>💼</span> <span>Job Descriptions</span></a>
+        <a href="upload.html" class="nav-link active"><span>📤</span> <span>Upload Resumes</span></a>
+        <a href="results.html" class="nav-link"><span>🎯</span> <span>Candidate Results</span></a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <h1 class="topbar-title">Upload Candidate Resumes</h1>
+      </header>
+
+      <main class="content-body" style="max-width: 860px;">
+        <div class="card" style="padding: 32px;">
+          <!-- Step 1: Select Target Job -->
+          <div style="margin-bottom: 24px;">
+            <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px;">
+              Select Target Job Description for Match Screening
+            </label>
+            <select id="target-job-select" class="select-filter" style="width: 100%; padding: 10px 14px; font-size: 14px;">
+              <option value="">Loading job openings...</option>
+            </select>
+          </div>
+
+          <!-- Drag and Drop Zone -->
+          <div id="dropzone" style="border: 2px dashed var(--border-color); border-radius: var(--radius-md); padding: 48px 24px; text-align: center; cursor: pointer; transition: all 0.2s; background: #fafafa;">
+            <div style="font-size: 40px; margin-bottom: 12px;">📁</div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">
+              Drag & Drop Resumes Here, or Click to Browse
+            </h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+              Supported formats: <strong>PDF</strong> and <strong>DOCX</strong> (Max 15MB each)
+            </p>
+            <input type="file" id="file-input" multiple accept=".pdf,.docx" style="display: none;">
+            <button type="button" class="btn btn-secondary" style="pointer-events: none;">
+              Select Files from Computer
+            </button>
+          </div>
+
+          <!-- File Queue List -->
+          <div id="file-queue-container"></div>
+
+          <!-- Upload Status Indicator -->
+          <div id="upload-status-box" style="display: none; margin-top: 20px; padding: 16px; border-radius: var(--radius-sm); background: var(--primary-light);"></div>
+
+          <!-- Upload Action Buttons -->
+          <div style="margin-top: 28px; display: flex; gap: 12px; justify-content: flex-end;">
+            <button type="button" onclick="uploadFiles()" id="btn-start-upload" class="btn btn-primary" style="padding: 12px 24px;" disabled>
+              Upload & Run AI Screening
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/upload.js"></script>
+</body>
+</html>

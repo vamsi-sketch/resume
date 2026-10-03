@@ -1,0 +1,14 @@
+# Python dependencies for AI-Based Resume Screening and Candidate Matching System
+flask==3.0.3
+flask-cors==4.0.1
+pymongo==4.7.2
+python-dotenv==1.0.1
+pypdf2==3.0.1
+pdfplumber==0.11.0
+python-docx==1.1.0
+sentence-transformers==2.7.0
+scikit-learn==1.4.2
+nltk==3.8.1
+numpy==1.26.4
+pandas==2.2.2
+werkzeug==3.0.2

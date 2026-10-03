@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Dashboard | AI Resume Screening</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">AI</div>
+        <div>
+          <div class="brand-title">ResumeAI</div>
+          <div class="brand-sub">Recruiter Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link active">
+          <span>📊</span> <span>Dashboard</span>
+        </a>
+        <a href="job.html" class="nav-link">
+          <span>💼</span> <span>Job Descriptions</span>
+        </a>
+        <a href="upload.html" class="nav-link">
+          <span>📤</span> <span>Upload Resumes</span>
+        </a>
+        <a href="results.html" class="nav-link">
+          <span>🎯</span> <span>Candidate Results</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div style="font-weight: 600; color: #334155;">NLP Match Engine</div>
+        <div style="color: #10b981; margin-top: 4px;">● System Online</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <h1 class="topbar-title">Recruiter Dashboard</h1>
+        <div class="topbar-actions">
+          <a href="job.html" class="btn btn-secondary">+ New Job</a>
+          <a href="upload.html" class="btn btn-primary">+ Upload Resumes</a>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- 4 Metric Cards -->
+        <div class="stats-grid">
+          <div class="card stat-card">
+            <div class="stat-icon icon-blue">📄</div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-total-resumes">--</div>
+              <div class="stat-label">Total Resumes</div>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-icon icon-indigo">🔍</div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-candidates-screened">--</div>
+              <div class="stat-label">Candidates Screened</div>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-icon icon-purple">🎯</div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-avg-score">--%</div>
+              <div class="stat-label">Average Match Score</div>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-icon icon-green">⭐</div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-shortlisted">--</div>
+              <div class="stat-label">Shortlisted Candidates</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+          <!-- Recent Applications Table -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Recent Applications</h2>
+              <a href="results.html" style="font-size: 13px; color: var(--primary); text-decoration: none; font-weight: 500;">View All &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Candidate</th>
+                    <th>Format / File</th>
+                    <th>Experience</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-table-body">
+                  <tr>
+                    <td colspan="5" style="text-align: center; color: #94a3b8; padding: 24px;">Loading recent applications...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Action / Workflow Guide -->
+          <div class="card" style="padding: 24px;">
+            <h2 class="card-title" style="margin-bottom: 16px;">Demo Screening Workflow</h2>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">1</div>
+                <div>
+                  <div style="font-size: 14px; font-weight: 600;">Create Target Job Description</div>
+                  <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Enter required skills (e.g. Python, SQL, Excel, Power BI) and minimum experience.</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">2</div>
+                <div>
+                  <div style="font-size: 14px; font-weight: 600;">Upload Candidate Resumes</div>
+                  <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Upload multiple PDF or DOCX files for automated text parsing.</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">3</div>
+                <div>
+                  <div style="font-size: 14px; font-weight: 600;">AI Semantic Matching</div>
+                  <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">System calculates transparent match % and identifies missing skills.</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">4</div>
+                <div>
+                  <div style="font-size: 14px; font-weight: 600;">Recruiter Decision Support</div>
+                  <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">Recruiter reviews profile details and marks Shortlist or Review.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+              <a href="results.html" class="btn btn-primary" style="width: 100%;">View Candidate Rankings &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
